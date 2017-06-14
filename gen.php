@@ -11,13 +11,13 @@ a:hover{color:red;}
 </head>
 <body>
 <h1>WAT IS DIT DAN?</h1>
-<p>Top 10 van dumpert van de afgelopen 10 dagen</p>
+<p>Top <?php echo $_GET['num']; ?> van dumpert van de afgelopen <?php echo $_GET['dagen']; ?> dagen</p>
 <?php
 $files=[];
 if ($handle = opendir('/var/www/html/dumpert/')) {
    while (false !== ($entry = readdir($handle))) {
 	$basename=basename($entry);
-	if ( ! ($basename == '.' OR $basename =='..' OR pathinfo($entry,PATHINFO_EXTENSION) != 'html' ) ){
+	if ( ! ($basename == '.' OR $basename =='..' OR pathinfo($entry,PATHINFO_EXTENSION) != 'html' OR strstr( $entry, "index" ) ) ){
 	       $files[]="/var/www/html/dumpert/".$entry;
 	}
    }
@@ -35,16 +35,19 @@ foreach($files as $name){
 	foreach($matches[1] as $key){
 		echo "<a href=\"$key\">".$matches[2][$i]."</a>, ";
 		$i++;
-		if($i==10){
+		if($i==$_GET['num']){
 			break;
 		}
 	}
 	$num++;
-	if($num == 10 ){
+	if($num == $_GET['dagen'] ){
 		break;
 	}
 }
 
+if($_GET['dagen']<=10){
+	echo "<hr><a style=\"color:red\" href=indexmeer.html>meer!</a>";
+}
 ?>
 </body>
 </html>
