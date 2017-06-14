@@ -1,0 +1,4 @@
+#!/bin/bash
+/bin/wget -q --header 'Cookie:"**; cpc=10; nsfw=1; jwplayer.volume=100; jwplayer.mute=false"' --header 'X-CookiesOK: I explicitly accept all cookies' -O /var/www/html/dumpert/$(date +'%Y%m%d').html http://www.dumpert.nl/toppers/
+/bin/curl -s "https://karloluiten.nl/dumpert/gen.php?num=10&dagen=10" | tr -d "\n" > /var/www/html/dumpert/index.html
+/bin/curl -s "https://karloluiten.nl/dumpert/gen.php?num=15&dagen=31" | tr -d "\n" > /var/www/html/dumpert/indexmeer.html

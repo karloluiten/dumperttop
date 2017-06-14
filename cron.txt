@@ -1,1 +1,1 @@
-0 22 * * * /root/dumpert
+0 22 * * * /path/to/gettop
